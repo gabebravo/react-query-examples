@@ -5,7 +5,9 @@ function App() {
   const { data, isLoading, isFetching, error } = useQuery(
     'pokemon',
     basicQuery,
-    {}
+    {
+      staleTime: 5000,
+    }
   )
   if (isLoading) {
     return <div>Loading...</div>
