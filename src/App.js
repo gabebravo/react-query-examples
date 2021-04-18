@@ -2,9 +2,11 @@ import { useQuery } from 'react-query'
 import basicQuery from './api/01-basic-query'
 
 function App() {
-  const { data, isLoading, error } = useQuery('pokemon', basicQuery, {
-    refetchOnWindowFocus: false,
-  })
+  const { data, isLoading, isFetching, error } = useQuery(
+    'pokemon',
+    basicQuery,
+    {}
+  )
   if (isLoading) {
     return <div>Loading...</div>
   }
@@ -27,6 +29,9 @@ function App() {
         <div className="row">
           <div className="column">
             <h3>Pokemon List</h3>
+            {isFetching ? (
+              <div style={{ marginBottom: 20 }}>Updating...</div>
+            ) : null}
             <ul>
               <ShowPokemon />
             </ul>
