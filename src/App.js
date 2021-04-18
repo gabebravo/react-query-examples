@@ -2,8 +2,9 @@ import { useQuery } from 'react-query'
 import basicQuery from './api/01-basic-query'
 
 function App() {
-  const { data, isLoading, error } = useQuery('pokemon', basicQuery)
-  console.log(`data`, data)
+  const { data, isLoading, error } = useQuery('pokemon', basicQuery, {
+    refetchOnWindowFocus: false,
+  })
   if (isLoading) {
     return <div>Loading...</div>
   }
@@ -22,9 +23,9 @@ function App() {
 
   return (
     data.length && (
-      <div class="container">
-        <div class="row">
-          <div class="column">
+      <div className="container">
+        <div className="row">
+          <div className="column">
             <h3>Pokemon List</h3>
             <ul>
               <ShowPokemon />
