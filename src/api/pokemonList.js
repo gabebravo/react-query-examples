@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const basicQuery = async () => {
+const pokemonList = async () => {
   try {
     await new Promise(resolve => setTimeout(resolve, 1000))
     const response = await axios.get('https://pokeapi.co/api/v2/pokemon')
@@ -10,4 +10,4 @@ const basicQuery = async () => {
   }
 }
 
-export { basicQuery as default }
+export { pokemonList as default }

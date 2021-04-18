@@ -1,45 +1,32 @@
-import { useQuery } from 'react-query'
-import basicQuery from './api/01-basic-query'
+import React, { lazy, Suspense } from 'react'
+import {
+  BrowserRouter as RouterWrapper,
+  Switch,
+  Route,
+} from 'react-router-dom'
 
-function App({ queryKey }) {
-  const { data, isLoading, isFetching, error } = useQuery(
-    queryKey,
-    basicQuery,
-    {}
-  )
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-  if (error) {
-    return <div>Woops... server error</div>
-  }
+// const Header = lazy(() => import('../components/Header'));
+const PokemonList = lazy(() => import('./views/PokemonList'))
+const PokemonDetails = lazy(() => import('./views/PokemonDetails'))
+const NoMatch = () => <>'There is nothing to see here'</>
 
-  const ShowPokemon = () =>
-    data.map(pk => (
-      <li key={pk.name}>
-        <a href={pk.url} target="_blank">
-          {pk.name}
-        </a>
-      </li>
-    ))
-
+export default function App() {
   return (
-    data.length && (
-      <div className="container">
-        <div className="row">
-          <div className="column">
-            <h3>Pokemon List</h3>
-            {isFetching ? (
-              <div style={{ marginBottom: 20 }}>Updating...</div>
-            ) : null}
-            <ul>
-              <ShowPokemon />
-            </ul>
-          </div>
-        </div>
-      </div>
-    )
+    <RouterWrapper>
+      <Suspense fallback={<p>...Loading</p>}>
+        {/* <Header /> */}
+        <Switch>
+          <Route exact path="/">
+            <PokemonList />
+          </Route>
+          <Route exact path="/PokemonDetails/:name">
+            <PokemonDetails />
+          </Route>
+          <Route path="*">
+            <NoMatch />
+          </Route>
+        </Switch>
+      </Suspense>
+    </RouterWrapper>
   )
 }
-
-export default App
