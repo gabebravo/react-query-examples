@@ -1,13 +1,11 @@
 import { useQuery } from 'react-query'
 import basicQuery from './api/01-basic-query'
 
-function App() {
+function App({ queryKey }) {
   const { data, isLoading, isFetching, error } = useQuery(
-    'pokemon',
+    queryKey,
     basicQuery,
-    {
-      staleTime: 5000,
-    }
+    {}
   )
   if (isLoading) {
     return <div>Loading...</div>
