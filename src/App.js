@@ -5,9 +5,11 @@ import {
   Route,
 } from 'react-router-dom'
 
-// const Header = lazy(() => import('../components/Header'));
-const PokemonList = lazy(() => import('./views/PokemonList'))
-const PokemonDetails = lazy(() => import('./views/PokemonDetails'))
+// const Header = lazy(() => import('./shared/Header'))
+const PokemonList = lazy(() => import('./views/PokemonList/PokemonList'))
+const PokemonDetails = lazy(() =>
+  import('./views/PokemonDetails/PokemonDetails')
+)
 const NoMatch = () => <>'There is nothing to see here'</>
 
 export default function App() {

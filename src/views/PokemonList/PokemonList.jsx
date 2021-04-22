@@ -1,16 +1,11 @@
-import { useQuery } from 'react-query'
-import pokemonList from '../api/pokemonList'
+import usePokemonList from '../../hooks/usePokemonList'
+import Header from './Header'
 import { useHistory } from "react-router-dom";
 
 export default function PokemonList() {
   let history = useHistory();
-  const { data, isLoading, isFetching, error } = useQuery(
-    'pokemonList',
-    pokemonList,
-    {
-      staleTime: Infinity,
-    }
-  )
+  const { data, isLoading, isFetching, error } = usePokemonList()
+
   if (isLoading) {
     return <div>Loading...</div>
   }
@@ -33,8 +28,9 @@ export default function PokemonList() {
   return (
     data.length && (
       <div className="container">
+        <Header length={data?.length} />
         <div className="row">
-          <div className="column">
+          <div className="column column-60 column-offset-10">
             <h3>Pokemon List</h3>
             {isFetching ? (
               <div style={{ marginBottom: 20 }}>Updating...</div>
