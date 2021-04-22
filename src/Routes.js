@@ -15,6 +15,7 @@ const PokemonDetails = lazy(() =>
 const BerryDetails = lazy(() =>
   import('./views/BerryDetails/BerryDetails')
 )
+const PokeSearch = lazy(() => import('./views/PokeSearch/PokeSearch'))
 const NoMatch = () => <>'There is nothing to see here'</>
 
 export default function App() {
@@ -37,6 +38,9 @@ export default function App() {
           </Route>
           <Route exact path="/BerryDetails/:name">
             <BerryDetails />
+          </Route>
+          <Route exact path="/PokeSearch">
+            <PokeSearch />
           </Route>
           <Route path="*">
             <NoMatch />

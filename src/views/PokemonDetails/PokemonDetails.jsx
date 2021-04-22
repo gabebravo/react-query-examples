@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import usePokemonDetails from '../../hooks/usePokemonDetails.js'
 import Header from './Header'
+import Pokemon from '../../shared/Pokemon'
 
 export default function PokemonDetails() {
   let { name } = useParams();
@@ -25,12 +26,7 @@ export default function PokemonDetails() {
   return status === 'success' ? (
     <div className="container">
         <Header name={name} />
-        <div className="row">
-          <div className="column column-60 column-offset-10">
-            <img src={data?.sprites?.other?.dream_world?.front_default} />
-            <span>{`weight: ${data?.weight}`}</span>
-          </div>
-        </div>
+        <Pokemon imgSrc={data?.sprites?.other?.dream_world?.front_default} weight={data?.weight} />
       </div>
   ) : null
 }
