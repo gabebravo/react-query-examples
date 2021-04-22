@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-const pokemonDetails = async name => {
+const berryDetails = async name => {
   try {
     await new Promise(resolve => setTimeout(resolve, 1000))
     const response = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${name}/`
+      `https://pokeapi.co/api/v2/berry/${name}/`
     )
     return response.data
   } catch (error) {
@@ -12,4 +12,4 @@ const pokemonDetails = async name => {
   }
 }
 
-export default pokemonDetails
+export default berryDetails

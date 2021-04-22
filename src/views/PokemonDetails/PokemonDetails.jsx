@@ -7,8 +7,17 @@ export default function PokemonDetails() {
   const { status, data, isLoading, isFetching, error } = usePokemonDetails(name)
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div className="container">
+    <div className="row">
+      <div className="column column-40 column-offset-40">
+        <h3 style={{ marginBottom: 20 }}>
+          Loading...
+        </h3>
+      </div>
+    </div>
+  </div>
   }
+  
   if (error) {
     return <div>Woops... server error</div>
   }
