@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query'
 import pokemonDetails from '../api/pokemonDetails'
 
+// NOTE : allows for config option overrides
 const usePokemonDetails = (
   name,
   config = {

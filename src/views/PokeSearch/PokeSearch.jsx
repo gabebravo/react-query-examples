@@ -1,21 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import usePokemonDetails from '../../hooks/usePokemonDetails'
+import React, { useState } from 'react'
 import Pokemon from '../../shared/Pokemon'
 
 export default function PokeSearch() {
   const [name, setName] = useState('')
   const [pokemon, setPokemon] = useState('') 
   // for the case of passing the initial value to the useQuery url, DONT use null, use ''
-
-  const { status, data, isLoading, isFetching, error, refetch } = usePokemonDetails(pokemon, {
-    enabled: false,
-  })
-
-  useEffect(() => {
-    if (pokemon) {
-      refetch();
-    }
-  }, [pokemon, refetch])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -35,7 +24,7 @@ export default function PokeSearch() {
         </div>
       </div>
       {
-        status === 'success' && <Pokemon imgSrc={data?.sprites?.other?.dream_world?.front_default} weight={data?.weight} />
+        pokemon && <Pokemon pokemon={pokemon} />
       }
     </div>
   )
