@@ -1,25 +1,22 @@
 import { useParams } from "react-router-dom";
 import useBerryDetails from '../../hooks/useBerryDetails'
+import FeedbackMessage from '../../shared/FeedbackMessage'
 import Header from './Header'
 
 export default function PokemonDetails() {
   let { name } = useParams();
   const { status, data, isLoading, isFetching, error } = useBerryDetails(name)
 
-  if (isLoading) {
-    return <div className="container">
-    <div className="row">
-      <div className="column column-40 column-offset-40">
-        <h3 style={{ marginBottom: 20 }}>
-          Loading...
-        </h3>
-      </div>
-    </div>
-  </div>
-  }
-  
   if (error) {
-    return <div>Woops... server error</div>
+    return <FeedbackMessage message='Woops... server error' />
+  }
+
+  if (isLoading) {
+    return <FeedbackMessage message='Loading...' />
+  }
+
+  if (isFetching) {
+    return <FeedbackMessage message='Data is updating...' />
   }
 
   return status === 'success' ? (

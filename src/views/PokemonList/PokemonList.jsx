@@ -1,4 +1,5 @@
 import usePokemonList from '../../hooks/usePokemonList'
+import FeedbackMessage from '../../shared/FeedbackMessage'
 import Header from './Header'
 import { useHistory } from "react-router-dom";
 
@@ -6,20 +7,16 @@ export default function PokemonList() {
   let history = useHistory();
   const { data, isLoading, isFetching, error } = usePokemonList()
 
-  if (isLoading) {
-    return <div className="container">
-    <div className="row">
-      <div className="column column-40 column-offset-40">
-        <h3 style={{ marginBottom: 20 }}>
-          Loading...
-        </h3>
-      </div>
-    </div>
-  </div>
+  if (error) {
+    return <FeedbackMessage message='Woops... server error' />
   }
 
-  if (error) {
-    return <div>Woops... server error</div>
+  if (isLoading) {
+    return <FeedbackMessage message='Loading...' />
+  }
+
+  if (isFetching) {
+    return <FeedbackMessage message='Data is updating...' />
   }
 
   const ShowPokemon = () =>

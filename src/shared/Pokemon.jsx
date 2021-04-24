@@ -1,27 +1,22 @@
 import usePokemonDetails from '../hooks/usePokemonDetails'
+import FeedbackMessage from './FeedbackMessage'
 
 // IMP : When the value changing the call is a prop, the behavior is diff. WORKS!
 export default function Pokemon({ pokemon = '' }) {
-  const { status, data, isLoading, isFetching, error } = usePokemonDetails(pokemon, { staleTime: 10000 })
+  const { status, data, isLoading, isFetching, error } = usePokemonDetails(pokemon, { 
+    retry: 2, staleTime: 10000, enabled: pokemon.length > 0 // is only enlabled if a pokemon value is present
+  })
+
+  if (error) {
+    return <FeedbackMessage message='Woops... server error' />
+  }
 
   if (isLoading) {
-    return <div className="container">
-    <div className="row">
-      <div className="column column-40 column-offset-40">
-        <h3 style={{ marginBottom: 20 }}>
-          Loading...
-        </h3>
-      </div>
-    </div>
-  </div>
+    return <FeedbackMessage message='Loading...' />
   }
 
   if (isFetching) {
-    return <div>Data is updating...</div>
-  }
-  
-  if (error) {
-    return <div>Woops... server error</div>
+    return <FeedbackMessage message='Data is updating...' />
   }
 
   return status === 'success' && (

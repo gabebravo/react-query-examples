@@ -1,4 +1,5 @@
 import useBerryList from '../../hooks/useBerryList'
+import FeedbackMessage from '../../shared/FeedbackMessage'
 import Header from './Header'
 import { useHistory } from "react-router-dom";
 
@@ -6,20 +7,16 @@ export default function BerryList() {
   let history = useHistory();
   const { data, isLoading, isFetching, error } = useBerryList()
 
-  if (isLoading) {
-    return <div className="container">
-    <div className="row">
-      <div className="column column-40 column-offset-40">
-        <h3 style={{ marginBottom: 20 }}>
-          Loading...
-        </h3>
-      </div>
-    </div>
-  </div>
-  }
-  
   if (error) {
-    return <div>Woops... server error</div>
+    return <FeedbackMessage message='Woops... server error' />
+  }
+
+  if (isLoading) {
+    return <FeedbackMessage message='Loading...' />
+  }
+
+  if (isFetching) {
+    return <FeedbackMessage message='Data is updating...' />
   }
 
   const ShowBerries = () =>
