@@ -16,6 +16,7 @@ const BerryDetails = lazy(() =>
   import('./views/BerryDetails/BerryDetails')
 )
 const PokeSearch = lazy(() => import('./views/PokeSearch/PokeSearch'))
+const UserInfo = lazy(() => import('./views/DependentQuery/UserInfo'))
 const NoMatch = () => <>'There is nothing to see here'</>
 
 export default function App() {
@@ -41,6 +42,9 @@ export default function App() {
           </Route>
           <Route exact path="/PokeSearch">
             <PokeSearch />
+          </Route>
+          <Route exact path="/DependentQuery">
+            <UserInfo />
           </Route>
           <Route path="*">
             <NoMatch />
