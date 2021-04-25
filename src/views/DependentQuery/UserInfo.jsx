@@ -36,7 +36,7 @@ export default function UserInfo() {
       <div className="row">
         <div className="column column-40 column-offset-40">
           <div>
-            { postInfo.status === 'success' && <PostTitles postInfo={postInfo?.data} /> } 
+            { postInfo.isSuccess && <PostTitles postInfo={postInfo?.data} /> } 
           </div>
         </div>
       </div>
