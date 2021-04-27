@@ -18,6 +18,9 @@ const BerryDetails = lazy(() =>
 const PokeSearch = lazy(() => import('./views/PokeSearch/PokeSearch'))
 const UserInfo = lazy(() => import('./views/DependentQuery/UserInfo'))
 const ListsItems = lazy(() => import('./views/ListsItems/ListsItems'))
+const QueryCacheEx = lazy(() =>
+  import('./views/QueryCacheEx/QueryCacheEx')
+)
 const NoMatch = () => <>'There is nothing to see here'</>
 
 export default function App() {
@@ -49,6 +52,9 @@ export default function App() {
           </Route>
           <Route exact path="/ListsItems">
             <ListsItems />
+          </Route>
+          <Route exact path="/QueryCacheEx">
+            <QueryCacheEx />
           </Route>
           <Route path="*">
             <NoMatch />
