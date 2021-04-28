@@ -21,6 +21,9 @@ const ListsItems = lazy(() => import('./views/ListsItems/ListsItems'))
 const QueryCacheEx = lazy(() =>
   import('./views/QueryCacheEx/QueryCacheEx')
 )
+const PushToQueryCache = lazy(() =>
+  import('./views/PushToQueryCache/PushToQueryCache')
+)
 const NoMatch = () => <>'There is nothing to see here'</>
 
 export default function App() {
@@ -55,6 +58,9 @@ export default function App() {
           </Route>
           <Route exact path="/QueryCacheEx">
             <QueryCacheEx />
+          </Route>
+          <Route exact path="/PushToQueryCache">
+            <PushToQueryCache />
           </Route>
           <Route path="*">
             <NoMatch />
