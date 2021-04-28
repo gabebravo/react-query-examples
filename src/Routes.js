@@ -24,6 +24,9 @@ const QueryCacheEx = lazy(() =>
 const PushToQueryCache = lazy(() =>
   import('./views/PushToQueryCache/PushToQueryCache')
 )
+const PostCountSideEffect = lazy(() =>
+  import('./views/QuerySideEffect/PostCount')
+)
 const NoMatch = () => <>'There is nothing to see here'</>
 
 export default function App() {
@@ -61,6 +64,9 @@ export default function App() {
           </Route>
           <Route exact path="/PushToQueryCache">
             <PushToQueryCache />
+          </Route>
+          <Route exact path="/PostCountSideEffect">
+            <PostCountSideEffect />
           </Route>
           <Route path="*">
             <NoMatch />
