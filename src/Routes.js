@@ -30,6 +30,9 @@ const PostCountSideEffect = lazy(() =>
 const ReftchQueryInvalidation = lazy(() =>
   import('./views/ReftchQueryInvalidation/ReftchQueryInvalidation')
 )
+const ReftchInvactiveQuery = lazy(() =>
+  import('./views/ReftchInvactiveQuery/ReftchInvactiveQuery')
+)
 const NoMatch = () => <>'There is nothing to see here'</>
 
 export default function App() {
@@ -73,6 +76,9 @@ export default function App() {
           </Route>
           <Route exact path="/ReftchQueryInvalidation">
             <ReftchQueryInvalidation />
+          </Route>
+          <Route exact path="/ReftchInvactiveQuery">
+            <ReftchInvactiveQuery />
           </Route>
           <Route path="*">
             <NoMatch />
