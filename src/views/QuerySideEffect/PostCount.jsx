@@ -37,7 +37,8 @@ function Posts({ setPostId }) {
       increment()
     },
     onError: error => {},
-    onSettled: (data, error) => {}, // finished and had either data or error
+    onSettled: (data, error) => {}, 
+    // like finally, has either data or error, value or undefined
   })
 
   return (
