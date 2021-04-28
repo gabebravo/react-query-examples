@@ -15,7 +15,8 @@ export default function PushToQueryCache() {
         'https://jsonplaceholder.typicode.com/posts'
       )
 
-      posts?.data.forEach( post => {
+// by default, when you use setQueryData, the data becomes immedeatly stale, so it will fetch again and update
+      posts?.data.forEach( post => { 
         queryCache.setQueryData(['pqcPost', post.id], post)
       })
 
