@@ -33,6 +33,14 @@ const ReftchQueryInvalidation = lazy(() =>
 const ReftchInvactiveQuery = lazy(() =>
   import('./views/ReftchInvactiveQuery/ReftchInvactiveQuery')
 )
+const ReftchMultiQueriesByInvalidating = lazy(() =>
+  import(
+    './views/ReftchMultiQueriesByInvalidating/ReftchMultiQueriesByInvalidating.jsx'
+  )
+)
+const ReftchMultiInvalidAlt = lazy(() =>
+  import('./views/ReftchMultiInvalidAlt/ReftchMultiInvalidAlt.jsx')
+)
 const NoMatch = () => <>'There is nothing to see here'</>
 
 export default function App() {
@@ -79,6 +87,12 @@ export default function App() {
           </Route>
           <Route exact path="/ReftchInvactiveQuery">
             <ReftchInvactiveQuery />
+          </Route>
+          <Route exact path="/ReftchMultiQueriesByInvalidating">
+            <ReftchMultiQueriesByInvalidating />
+          </Route>
+          <Route exact path="/ReftchMultiInvalidAlt">
+            <ReftchMultiInvalidAlt />
           </Route>
           <Route path="*">
             <NoMatch />
