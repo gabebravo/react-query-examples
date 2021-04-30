@@ -41,30 +41,38 @@ const ReftchMultiQueriesByInvalidating = lazy(() =>
 const ReftchMultiInvalidAlt = lazy(() =>
   import('./views/ReftchMultiInvalidAlt/ReftchMultiInvalidAlt.jsx')
 )
+const TodoMutations = lazy(() =>
+  import('./views/TodoMutations/TodoMutations.jsx')
+)
 const NoMatch = () => <>'There is nothing to see here'</>
 
 export default function App() {
   return (
     <RouterWrapper>
       <Suspense fallback={<p>...Loading</p>}>
-        <MainHeader />
         <Switch>
           <Route exact path="/">
+            <MainHeader />
             <Home />
           </Route>
           <Route exact path="/PokemonList">
+            <MainHeader />
             <PokemonList />
           </Route>
           <Route exact path="/PokemonDetails/:name">
+            <MainHeader />
             <PokemonDetails />
           </Route>
           <Route exact path="/BerryList">
+            <MainHeader />
             <BerryList />
           </Route>
           <Route exact path="/BerryDetails/:name">
+            <MainHeader />
             <BerryDetails />
           </Route>
           <Route exact path="/PokeSearch">
+            <MainHeader />
             <PokeSearch />
           </Route>
           <Route exact path="/DependentQuery">
@@ -93,6 +101,9 @@ export default function App() {
           </Route>
           <Route exact path="/ReftchMultiInvalidAlt">
             <ReftchMultiInvalidAlt />
+          </Route>
+          <Route exact path="/TodoMutations">
+            <TodoMutations />
           </Route>
           <Route path="*">
             <NoMatch />
