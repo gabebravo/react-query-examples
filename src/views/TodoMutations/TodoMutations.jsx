@@ -1,8 +1,10 @@
 import React from 'react'
-import { useGetTodos } from '../../hooks/useTodoMutation'
+import { useGetTodos, usePostTodo } from '../../hooks/useTodoMutation'
 import FeedbackMessage from '../../shared/FeedbackMessage'
+import TodoForm from './TodoForm'
 
 export default function TodoMutations() {
+  const todoPostRq = usePostTodo()
 
   const ShowTodos = () => {
     const { data, isLoading, isSuccess } = useGetTodos()
@@ -17,18 +19,22 @@ export default function TodoMutations() {
           style={{
             fontSize: '2rem',
             display: 'flex',
-            justifyContent: 'space-evenly',
             width: '22rem',
+            justifyContent: 'space-between'
           }}
           key={todo.id}>
-          <span 
-            style={{ color: '#9b4dca', cursor: 'pointer' }}
-            onClick={() => console.log(todo.id)}
-          >
-            {todo.text}
-          </span>
-          <span style={{ color: todo.checked && 'green' }}><i class="ri-checkbox-circle-fill"></i></span>
-          <span style={{ color: 'red' }}><i class="ri-close-circle-fill"></i></span>
+          <div>
+            <span 
+              style={{ color: '#9b4dca', cursor: 'pointer' }}
+              onClick={() => console.log(todo.id)}
+            >
+              {todo.text}
+            </span>
+          </div>
+          <div style={{ width: 30 }}>
+            <span style={{ color: todo.checked && 'green' }}><i className="ri-checkbox-circle-fill"></i></span>
+            <span style={{ color: 'red', marginLeft: 10 }}><i className="ri-close-circle-fill"></i></span>
+          </div>
         </li>
       ))
     }
@@ -37,9 +43,14 @@ export default function TodoMutations() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column'}}>
       <h3 style={{ textAlign: 'center', marginTop: '1rem' }}>Todo List</h3>
-      <ul style={{ display: 'flex', justifyContent: 'center' }}>
-        <ShowTodos />
-      </ul>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <ul style={{ width: 300 }}>
+          <ShowTodos />
+        </ul>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <TodoForm todoPostRq={todoPostRq} />
+      </div>
     </div>
   )
 }
