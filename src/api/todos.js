@@ -38,3 +38,17 @@ export const deleteTodo = async id => {
     throw new Error('No Data')
   }
 }
+
+export const putTodo = async todo => {
+  try {
+    todo.checked = !todo.checked
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    const response = await axios.put(
+      `${process.env.REACT_APP_BASE_URL}/todos/${todo.id}`,
+      todo
+    )
+    return response.data
+  } catch (error) {
+    throw new Error('No Data')
+  }
+}

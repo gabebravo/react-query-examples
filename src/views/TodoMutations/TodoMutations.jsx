@@ -1,11 +1,12 @@
 import React from 'react'
-import { useGetTodos, usePostTodo, useDeleteTodo } from '../../hooks/useTodoMutation'
+import { useGetTodos, usePostTodo, useDeleteTodo, usePutTodo } from '../../hooks/useTodoMutation'
 import FeedbackMessage from '../../shared/FeedbackMessage'
 import TodoForm from './TodoForm'
 
 export default function TodoMutations() {
   const todoPostRq = usePostTodo()
   const todoDeleteRq = useDeleteTodo()
+  const todoPutRq = usePutTodo()
 
   const ShowTodos = () => {
     const { data, isLoading, isSuccess } = useGetTodos()
@@ -33,7 +34,11 @@ export default function TodoMutations() {
             </span>
           </div>
           <div style={{ width: 30 }}>
-            <span style={{ color: todo.checked && 'green' }}><i className="ri-checkbox-circle-fill"></i></span>
+            <span 
+              onClick={() => todoPutRq.mutateAsync(todo)}
+              style={{ color: todo.checked && 'green' }}>
+                <i className="ri-checkbox-circle-fill"></i>
+            </span>
             <span 
               onClick={() => todoDeleteRq.mutateAsync(todo.id)} 
               style={{ color: 'red', marginLeft: 10 }}>
