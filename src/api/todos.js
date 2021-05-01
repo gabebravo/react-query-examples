@@ -26,3 +26,15 @@ export const postTodo = async todo => {
     throw new Error('No Data')
   }
 }
+
+export const deleteTodo = async id => {
+  try {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    const response = await axios.delete(
+      `${process.env.REACT_APP_BASE_URL}/todos/${id}`
+    )
+    return response.data
+  } catch (error) {
+    throw new Error('No Data')
+  }
+}
