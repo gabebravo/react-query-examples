@@ -1,5 +1,4 @@
 import React from 'react'
-import FeedbackMessage from '../../shared/FeedbackMessage'
 
 export default function TodoForm({
   initialValues = '', 
@@ -7,6 +6,18 @@ export default function TodoForm({
 }) {
   const [todo, setTodo] = React.useState('')
   const { isSuccess, isLoading, error } = todoPostRq
+
+  const FeedbackMessage = ({ message }) => (
+    <div className="container">
+      <div className="row">
+        <div>
+          <h3 style={{ marginBottom: 20 }}>
+            {message}
+          </h3>
+        </div>
+      </div>
+    </div>
+  )  
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -16,7 +27,7 @@ export default function TodoForm({
 
   const ShowHeaderMessage = () => {
     if (error) {
-      return <FeedbackMessage message='Woops... server error' />
+      return <FeedbackMessage message={`Whoops... ${error}`} /> // style={{ fontSize: }} 
     }
   
     if (isLoading) {

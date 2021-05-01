@@ -16,14 +16,16 @@ export const postTodo = async todo => {
   try {
     await new Promise(resolve => setTimeout(resolve, 1000))
     const response = await axios.post(
-      `${process.env.REACT_APP_BASE_URL}/todos`,
+      todo.toLowerCase() !== 'path error'
+        ? `${process.env.REACT_APP_BASE_URL}/todos`
+        : `${process.env.REACT_APP_BASE_URL}/path-error`, // this will cause an error
       {
         text: todo,
       }
     )
     return response.data
   } catch (error) {
-    throw new Error('No Data')
+    throw error.message
   }
 }
 

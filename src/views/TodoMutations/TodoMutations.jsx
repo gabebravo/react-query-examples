@@ -3,14 +3,18 @@ import { useGetTodos, usePostTodo, useDeleteTodo, usePutTodo } from '../../hooks
 import FeedbackMessage from '../../shared/FeedbackMessage'
 import TodoForm from './TodoForm'
 
+// https://react-query.tanstack.com/reference/useMutation
+// https://learn.tanstack.com/courses/1024224/lectures/22947254
+// https://learn.tanstack.com/courses/1024224/lectures/21280171
+// https://learn.tanstack.com/courses/1024224/lectures/21280176
+
 export default function TodoMutations() {
+  const { data, isLoading, isFetching, isSuccess } = useGetTodos()
   const todoPostRq = usePostTodo()
   const todoDeleteRq = useDeleteTodo()
   const todoPutRq = usePutTodo()
 
   const ShowTodos = () => {
-    const { data, isLoading, isSuccess } = useGetTodos()
-  
     if (isLoading) {
       return <FeedbackMessage message='Loading...' />
     }
@@ -52,7 +56,9 @@ export default function TodoMutations() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column'}}>
-      <h3 style={{ textAlign: 'center', marginTop: '1rem' }}>Todo List</h3>
+      <h3 style={{ textAlign: 'center', marginTop: '1rem' }}>
+        {`Todo List ${isFetching ? '...' :  ''}`}
+      </h3>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <ul style={{ width: 300 }}>
           <ShowTodos />
