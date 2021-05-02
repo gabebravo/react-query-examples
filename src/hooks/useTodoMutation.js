@@ -95,4 +95,32 @@ EX 3 - onSettled will run all the time and either return success or error :
   }
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+EX 3 - an optimistic update that will immediately write the data coming back from the api call
+  to the cache, so the user won't see any lag on an expensive call, BUT - the query cache key 
+  is still invalidated to force a refetch to the api to get the updated data from the POST call : 
+
+const [savePost, savePostInfo] = useMutation(
+    (values) =>
+      axios.patch(`/api/posts/${values.id}`, values).then((res) => res.data),
+    {
+      onSuccess: (data, values) => {
+        console.log(data)
+        queryCache.setQueryData(['post', String(values.id)], data)
+        queryCache.invalidateQueries(['post', String(values.id)])
+      },
+    }
+  )
+
+  NOTE - onSuccess has 2 args that can be used in its callback (arg1 = data, arg2 = values) :
+    data: the data that is coming back immedeatly from the api call 
+      * this data in the example is getting written to the query cache using setQueryData
+
+    values: these are the arguments originally passed into the upper scope of the function 
+      typically provided at the time its called. 
+      * these values in the example have the id needed to be used in invalidateQueries, 
+          so that the force refetch matches the original one
+ 
+  IMP : Tanner reccomends still doing the invalidateQueries and forcing a refetch any time
+    setQueryData is being used to optimistically update the UI
 */
